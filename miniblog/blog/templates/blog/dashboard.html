@@ -1,0 +1,63 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% block msg %}
+{% if messages %}
+ {% for m in messages %}
+  <div {% if m.tags%} class="alert-{{m.tags}}"   {% endif %}>
+    <strong >{{m}}</strong>
+    <button type="button" class="close" data-dsimiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+ {% endfor %}
+{% endif %}
+{% endblock msg %}
+
+{% block side %}
+  <div class="main-profile">
+    
+{% endblock side %}
+  
+
+
+{% block content %}
+<div class="main-profile2">
+    <div class="table-content">
+    <a href="{% url 'addpost' %}" class="btn2">Add Notice</a>
+
+    {% if posts %}
+     <table class="table">
+        <thead>
+            <tr class="text-center desc">
+                <th scope="col" style="width:2%">ID <hr></th>
+                <th scope="col" style="width:28%">Title <hr></th>
+                <th scope="col" style="width:55%">Description <hr></th>
+                <th scope="col" style="width:15%">Action<hr></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for p in posts %}
+             <tr >
+                <th scope="row">{{p.id}} </th>
+                <td >{{p.title}} </td>
+                <td >{{p.desc}} <hr></td>
+                <td class="text-center">
+                    <a href="{% url 'updatepost' p.id %}" class="addbtn">Edit</a>
+                    {% if perms.blog.delete_post %}
+                        <form action="{% url 'deletepost' p.id %}" method="post" class="d-inline">
+                            {% csrf_token %}
+                            <input type="submit" value="Delete" class="cancelbtn">
+                        </form>
+                    {% endif %}
+                    
+                </td>
+             </tr>
+            {% endfor %}
+        </tbody>
+     </table>
+    </div>
+    {% endif %}
+</div>
+{% endblock content %}
+

@@ -1,0 +1,39 @@
+{% comment %} <nav class="navbar">
+  <div class="max-width">
+      <div class="logo"><a href="#">Mini<span>Blog.</span></a></div>
+      <ul class="menu">
+  <li><a href="/" class="menu-btn">Home <span class="sr-only"></span></a></li>
+  <li><a href="{% url 'about' %}" class="menu-btn">Why Blogs</a></li>
+  <li><a href="{% url 'contact' %}" class="menu-btn">Contact</a></li>
+{% if request.user.is_authenticated %}
+  <li><a href="{% url 'dashboard' %}" class="menu-btn">Dashboard</a></li>
+  <li><a href="{% url 'logout' %}" class="menu-btn">LogOut</a></li>
+{% else %}
+  <li><a href="{% url 'signup' %}" class="menu-btn">SignUp</a></li>
+  <li><a href="{% url 'login' %}" class="menu-btn">LogIn</a></li>
+{% endif %}
+</ul>
+<div class="menu-btn">
+    <i class="fas fa-bars"></i>
+</div>
+</div>
+</nav> {% endcomment %}
+
+<header class="header">
+    <a href="" class="logo">Note-the-Notices</a>
+  <nav class="navbar">
+    <a href="/">Home <span class="sr-only"></span></a>
+    {% comment %} {% endcomment %}
+    {% comment %} <a href="{% url 'queries' %}">Queries</a> {% endcomment %}
+  {% if request.user.is_authenticated %}
+    <a href="{% url 'dashboard' %}">Dashboard</a>
+    <a href="{% url 'profile' %}">Profile</a>
+   
+    <a href="{% url 'logout' %}">LogOut</a>
+  {% else %}
+    <a href="{% url 'contact' %}">Contact</a>
+    <a href="{% url 'signup' %}">SignUp</a>
+    <a href="{% url 'login' %}">LogIn</a>
+  {% endif %}  
+  </nav>
+</header>
